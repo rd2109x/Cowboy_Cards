@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 
 const ClassDetail = () => {
   const { id } = useParams();
@@ -14,6 +15,12 @@ const ClassDetail = () => {
       { id: 1, name: "Chapter 1: Cell Biology", totalCards: 20, mastered: 15 },
       { id: 2, name: "Chapter 2: Genetics", totalCards: 15, mastered: 8 },
     ],
+    leaderboard: [
+      { id: 1, name: "John Doe", mastered: 35, totalAttempted: 40 },
+      { id: 2, name: "Jane Smith", mastered: 32, totalAttempted: 38 },
+      { id: 3, name: "Bob Johnson", mastered: 28, totalAttempted: 35 },
+      { id: 4, name: "Alice Brown", mastered: 25, totalAttempted: 30 },
+    ]
   };
 
   return (
@@ -26,7 +33,7 @@ const ClassDetail = () => {
       <Tabs defaultValue="sets" className="w-full">
         <TabsList>
           <TabsTrigger value="sets">Flashcard Sets</TabsTrigger>
-          <TabsTrigger value="announcements">Announcements</TabsTrigger>
+          <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
         </TabsList>
 
         <TabsContent value="sets">
@@ -59,8 +66,33 @@ const ClassDetail = () => {
           </div>
         </TabsContent>
 
-        <TabsContent value="announcements">
-          <p className="text-gray-600">No announcements yet.</p>
+        <TabsContent value="leaderboard">
+          <Card>
+            <CardContent className="p-4">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Rank</TableHead>
+                    <TableHead>Student</TableHead>
+                    <TableHead>Cards Mastered</TableHead>
+                    <TableHead>Success Rate</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {classData.leaderboard.map((student, index) => (
+                    <TableRow key={student.id}>
+                      <TableCell className="font-medium">{index + 1}</TableCell>
+                      <TableCell>{student.name}</TableCell>
+                      <TableCell>{student.mastered}</TableCell>
+                      <TableCell>
+                        {Math.round((student.mastered / student.totalAttempted) * 100)}%
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
