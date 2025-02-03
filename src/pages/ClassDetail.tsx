@@ -5,6 +5,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { FlashCard } from "@/components/flashcards/FlashCard";
 import { useState } from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const ClassDetail = () => {
   const { id } = useParams();
@@ -45,12 +52,10 @@ const ClassDetail = () => {
   };
 
   const handleMastered = () => {
-    // In a real app, this would update the backend
     console.log("Card marked as mastered");
   };
 
   const handleStillLearning = () => {
-    // In a real app, this would update the backend
     console.log("Card marked as still learning");
   };
 
@@ -69,9 +74,7 @@ const ClassDetail = () => {
 
         <TabsContent value="sets">
           <div className="mb-4">
-            <Button>
-              Create New Set
-            </Button>
+            <Button>Create New Set</Button>
           </div>
 
           {selectedSetId === null ? (
@@ -101,15 +104,22 @@ const ClassDetail = () => {
               <Button onClick={() => setSelectedSetId(null)} variant="outline" className="mb-4">
                 ← Back to Sets
               </Button>
-              {flashcardsData[selectedSetId].map((card) => (
-                <FlashCard
-                  key={card.id}
-                  front={card.front}
-                  back={card.back}
-                  onMastered={handleMastered}
-                  onStillLearning={handleStillLearning}
-                />
-              ))}
+              <Carousel opts={{ axis: 'y' }} className="w-full">
+                <CarouselContent className="-mt-1 h-[400px]">
+                  {flashcardsData[selectedSetId].map((card) => (
+                    <CarouselItem key={card.id}>
+                      <FlashCard
+                        front={card.front}
+                        back={card.back}
+                        onMastered={handleMastered}
+                        onStillLearning={handleStillLearning}
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
             </div>
           )}
         </TabsContent>
