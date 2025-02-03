@@ -12,11 +12,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { type CarouselApi } from "@/components/ui/carousel";
 
 const ClassDetail = () => {
   const { id } = useParams();
   const [selectedSetId, setSelectedSetId] = useState<number | null>(null);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [api, setApi] = useState<CarouselApi>();
   
   // Mock data - in a real app this would come from an API
   const classData = {
@@ -53,10 +55,6 @@ const ClassDetail = () => {
     setCurrentCardIndex(0);
   };
 
-  const handleCarouselChange = (index: number) => {
-    setCurrentCardIndex(index);
-  };
-
   const handleMastered = () => {
     console.log("Card marked as mastered");
   };
@@ -64,6 +62,17 @@ const ClassDetail = () => {
   const handleStillLearning = () => {
     console.log("Card marked as still learning");
   };
+
+  // Update current card index when the carousel changes
+  React.useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    api.on("select", () => {
+      setCurrentCardIndex(api.selectedScrollSnap());
+    });
+  }, [api]);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -114,7 +123,7 @@ const ClassDetail = () => {
                 <Carousel 
                   orientation="vertical" 
                   className="w-full"
-                  onSelect={handleCarouselChange}
+                  setApi={setApi}
                 >
                   <CarouselContent className="-mt-1 h-[400px]">
                     {flashcardsData[selectedSetId].map((card) => (
