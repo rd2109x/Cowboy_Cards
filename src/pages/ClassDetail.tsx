@@ -16,6 +16,7 @@ import {
 const ClassDetail = () => {
   const { id } = useParams();
   const [selectedSetId, setSelectedSetId] = useState<number | null>(null);
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
   
   // Mock data - in a real app this would come from an API
   const classData = {
@@ -49,6 +50,11 @@ const ClassDetail = () => {
 
   const handleSetClick = (setId: number) => {
     setSelectedSetId(setId);
+    setCurrentCardIndex(0);
+  };
+
+  const handleCarouselChange = (index: number) => {
+    setCurrentCardIndex(index);
   };
 
   const handleMastered = () => {
@@ -104,8 +110,12 @@ const ClassDetail = () => {
               <Button onClick={() => setSelectedSetId(null)} variant="outline" className="mb-4">
                 ← Back to Sets
               </Button>
-              <div className="w-full max-w-2xl mx-auto">
-                <Carousel orientation="vertical" className="w-full">
+              <div className="w-full max-w-2xl mx-auto relative">
+                <Carousel 
+                  orientation="vertical" 
+                  className="w-full"
+                  onSelect={handleCarouselChange}
+                >
                   <CarouselContent className="-mt-1 h-[400px]">
                     {flashcardsData[selectedSetId].map((card) => (
                       <CarouselItem key={card.id}>
@@ -121,6 +131,17 @@ const ClassDetail = () => {
                   <CarouselPrevious />
                   <CarouselNext />
                 </Carousel>
+                {/* Pagination dots */}
+                <div className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 flex flex-col gap-2">
+                  {flashcardsData[selectedSetId].map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-2 h-2 rounded-full transition-colors ${
+                        index === currentCardIndex ? 'bg-primary' : 'bg-gray-300'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           )}
