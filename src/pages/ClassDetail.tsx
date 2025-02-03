@@ -1,10 +1,10 @@
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { FlashCard } from "@/components/flashcards/FlashCard";
-import { useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -64,7 +64,7 @@ const ClassDetail = () => {
   };
 
   // Update current card index when the carousel changes
-  React.useEffect(() => {
+  useEffect(() => {
     if (!api) {
       return;
     }
