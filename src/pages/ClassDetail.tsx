@@ -105,7 +105,7 @@ const ClassDetail = () => {
                 ← Back to Sets
               </Button>
               <div className="w-full max-w-2xl mx-auto">
-                <Carousel className="w-full">
+                <Carousel orientation="vertical" className="w-full">
                   <CarouselContent className="-mt-1 h-[400px]">
                     {flashcardsData[selectedSetId].map((card) => (
                       <CarouselItem key={card.id}>
