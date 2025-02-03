@@ -104,22 +104,24 @@ const ClassDetail = () => {
               <Button onClick={() => setSelectedSetId(null)} variant="outline" className="mb-4">
                 ← Back to Sets
               </Button>
-              <Carousel opts={{ axis: 'y' }} className="w-full">
-                <CarouselContent className="-mt-1 h-[400px]">
-                  {flashcardsData[selectedSetId].map((card) => (
-                    <CarouselItem key={card.id}>
-                      <FlashCard
-                        front={card.front}
-                        back={card.back}
-                        onMastered={handleMastered}
-                        onStillLearning={handleStillLearning}
-                      />
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-              </Carousel>
+              <div className="w-full max-w-2xl mx-auto">
+                <Carousel className="w-full">
+                  <CarouselContent className="-mt-1 h-[400px]">
+                    {flashcardsData[selectedSetId].map((card) => (
+                      <CarouselItem key={card.id}>
+                        <FlashCard
+                          front={card.front}
+                          back={card.back}
+                          onMastered={handleMastered}
+                          onStillLearning={handleStillLearning}
+                        />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
+              </div>
             </div>
           )}
         </TabsContent>
