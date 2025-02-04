@@ -4,15 +4,29 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Apple, LogIn } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
 
 export const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // In a real app, you would validate credentials here
     console.log("Auth submitted:", { email, password, isLogin });
+    
+    // Show success message
+    toast({
+      title: isLogin ? "Welcome back!" : "Account created",
+      description: "You have been successfully logged in.",
+    });
+
+    // Navigate to the home page
+    navigate("/home");
   };
 
   return (
