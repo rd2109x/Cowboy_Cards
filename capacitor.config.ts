@@ -2,7 +2,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.2b671144109d4111bc325c5702dadfa1',
+  appId: 'app.lovable.2b671144109d4111bc32-5c5702dadfa1',
   appName: 'flashclass-nectar',
   webDir: 'dist',
   server: {
