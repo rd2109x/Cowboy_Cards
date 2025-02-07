@@ -21,7 +21,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Route, Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Index from "./pages/Index";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -39,12 +39,10 @@ const App = () => (
       <IonApp>
         <IonReactRouter>
           <IonRouterOutlet>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/class/:id" element={<ClassDetail />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <Route exact path="/" render={() => <Index />} />
+            <Route exact path="/home" render={() => <Home />} />
+            <Route exact path="/class/:id" render={() => <ClassDetail />} />
+            <Route render={() => <NotFound />} />
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>
