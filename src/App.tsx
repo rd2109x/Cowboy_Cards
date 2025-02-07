@@ -39,10 +39,10 @@ const App = () => (
       <IonApp>
         <IonReactRouter>
           <IonRouterOutlet>
-            <Route path="/" render={() => <Index />} exact={true} />
-            <Route path="/home" render={() => <Home />} exact={true} />
-            <Route path="/class/:id" render={() => <ClassDetail />} exact={true} />
-            <Route path="*" render={() => <NotFound />} />
+            <Route path="/" element={<Index />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/class/:id" element={<ClassDetail />} />
+            <Route path="*" element={<NotFound />} />
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>
