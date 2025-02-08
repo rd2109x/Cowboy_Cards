@@ -37,8 +37,6 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
       <IonApp>
         <IonReactRouter>
           <IonRouterOutlet>
@@ -49,6 +47,8 @@ const App = () => (
           </IonRouterOutlet>
         </IonReactRouter>
       </IonApp>
+      <Toaster />
+      <Sonner />
     </TooltipProvider>
   </QueryClientProvider>
 );

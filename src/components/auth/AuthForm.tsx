@@ -1,17 +1,18 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Apple, LogIn } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useIonRouter } from "@ionic/react";
 import { useToast } from "@/components/ui/use-toast";
 
 export const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const ionRouter = useIonRouter();
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -25,8 +26,8 @@ export const AuthForm = () => {
       description: "You have been successfully logged in.",
     });
 
-    // Navigate to the home page
-    navigate("/home");
+    // Navigate to the home page using Ionic's router
+    ionRouter.push("/home");
   };
 
   return (
