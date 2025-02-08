@@ -1,0 +1,8 @@
+
+{
+  "name": "flashclass-nectar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
