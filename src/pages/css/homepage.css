@@ -1,0 +1,20 @@
+/* Add the card-clicked class for animation */
+.card-clicked {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out !important;
+    transform: scale(0.98) rotate(2deg) !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
+  }
+  /* Add the card-hover class for hover effect */
+.card-hover:hover {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out !important;
+    transform: scale(1.02) !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
+  }
+  /* Ensure the hover effect respects the rounded corners */
+.card-hover {
+    overflow: hidden;
+  }
+  /* Test style */
+.test-style {
+    background-color: yellow !important;
+  }
